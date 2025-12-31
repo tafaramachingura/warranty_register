@@ -1,0 +1,46 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# Build artifacts
+*.o
+*.a
+*.so
+.DS_Store
+
+# Binaries
+bin/
+dist/
+vendor/
+
+# Test coverage
+*.out
+coverage.html
+
+# Environment files
+.env
+.env.local
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Documentation
+README.md
+docs/
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+.travis.yml
+
+# Development
+go.sum
