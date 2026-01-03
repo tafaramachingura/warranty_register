@@ -125,7 +125,7 @@ REST_KNOX = {
 }
 
 # CORS
-CORS_ALLOWED_ORIGINS = ['http://localhost:3000', 'http://localhost:8000']
+CORS_ALLOWED_ORIGINS = os.environ.get('CONS_ALLOWED_ORIGINS', '').split(',')
 
 SERVICE_JWT_SECRET = os.environ.get('SERVICE_JWT_SECRET')
 SERVICE_JWT_ISSUER = os.environ.get('SERVICE_JWT_ISSUER', 'nextjs-service')

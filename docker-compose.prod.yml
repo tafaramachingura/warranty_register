@@ -14,7 +14,7 @@ services:
       - static_volume:/app/staticfiles
       - ./:/app
     env_file:
-      - .env.prod
+      - .env.pro
     restart: unless-stopped
     networks:
       - app_network
