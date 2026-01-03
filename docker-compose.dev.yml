@@ -1,0 +1,40 @@
+version: "3.8"
+
+services:
+  web:
+    build: .
+    env_file:
+      - .env.dev
+    command: >
+      sh -c "
+      until pg_isready -h db -p 5432 -U postgres; do
+        echo 'waiting for db';
+        sleep 1;
+      done &&
+      python manage.py migrate &&
+      python manage.py runserver 0.0.0.0:8000
+      "
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    networks:
+      - app_network
+
+  db:
+    image: postgres:13
+    container_name: warranty_register_db
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - app_network
+
+volumes:
+  pgdata:
+
+networks:
+  app_network:

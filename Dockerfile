@@ -8,6 +8,7 @@ WORKDIR /app
 
 RUN apk update && \
     apk add --no-cache \
+    bash \
     gcc \
     musl-dev \
     postgresql-client \

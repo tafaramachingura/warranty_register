@@ -4,6 +4,7 @@ from rest_framework.decorators import api_view, permission_classes, authenticati
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .authentication import tokenAuthentication
+from rest_framework.views import APIView as APIVIEW
 from django.contrib.auth.models import User
 from .models import Asset
 from .serializers import AssetSerializer
@@ -35,7 +36,7 @@ def register_warranty(request):
         )
 
         return Response({
-            "status": "success",
+            "status": 'success',
             "message": "Warranty registered successfully" if created else "Warranty updated",
             "asset_id": asset.asset_id
         })
@@ -44,4 +45,7 @@ def register_warranty(request):
         import traceback
         traceback.print_exc()
         return Response({"error": str(e)}, status=400)
+    
+
+
 

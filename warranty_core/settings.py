@@ -3,7 +3,19 @@ from pathlib import Path
 import dj_database_url
 from dotenv import load_dotenv
 from datetime import timedelta
-load_dotenv()  # Load .env variables
+
+# Load base .env
+load_dotenv()  # Load `.env`
+
+# Load environment-specific variables from `.env.<ENV>` where ENV is one of:
+# DJANGO_ENV, ENV, ENVIRONMENT. If not provided and DEBUG=True, try `.env.dev`.
+_env_name = os.environ.get('DJANGO_ENV') or os.environ.get('ENV') or os.environ.get('ENVIRONMENT')
+if _env_name:
+    load_dotenv(f".env.{_env_name}", override=True)
+else:
+    if os.environ.get('DEBUG', 'False').lower() in ['true', '1', 't']:
+        load_dotenv('.env.dev', override=True)
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -11,7 +23,11 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-test-key')
 
 DEBUG = os.environ.get('DEBUG', 'False').lower() in ['true', '1', 't']
 
-ALLOWED_HOSTS =["*"]
+ALLOWED_HOSTS = os.environ.get(
+    'ALLOWED_HOSTS',
+    'localhost,127.0.0.1'
+).split(',')
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -69,11 +85,13 @@ WSGI_APPLICATION = 'warranty_core.wsgi.application'
 DATABASE_URL = os.environ.get('DATABASE_URL')
 DATABASES = {
     'default': dj_database_url.parse(
-        DATABASE_URL or "postgresql://postgres:Tafara9610.@aws-1-eu-west-1.pooler.supabase.com:5432/postgres?sslmode=require",
+        DATABASE_URL ,
         conn_max_age=600
     )
 }
-DATABASES['default']['OPTIONS'] = {'sslmode': 'require'}
+DB_SSL = os.environ.get('DB_SSL', 'true').lower() in ('true', '1', 't')
+if DB_SSL:
+    DATABASES['default'].setdefault('OPTIONS', {})['sslmode'] = 'require'
 
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
