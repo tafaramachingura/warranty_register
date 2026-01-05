@@ -138,6 +138,10 @@ celerybeat.pid
 .env
 .env.dev
 .env.pro
+.env.test
+.env.local
+.env.production
+.env.pg
 .envrc
 .venv
 env/
