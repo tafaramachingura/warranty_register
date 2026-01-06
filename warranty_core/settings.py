@@ -44,8 +44,8 @@ INSTALLED_APPS = [
     
 ]
 CSRF_TRUSTED_ORIGINS = [
-    "https://server8.eport.ws",
-    "http://server8.eport.ws",
+    "https://vm2.eport.ws",
+    "http://vm2.eport.ws",
 ]
 
 
