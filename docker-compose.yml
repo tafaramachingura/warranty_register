@@ -12,7 +12,7 @@ services:
       "
     volumes:
       - ./:/app
-      - static_volume:/app/staticfiles
+      - staticfiles:/app/staticfiles
     restart: unless-stopped
     networks:
       - app_network
