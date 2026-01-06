@@ -28,6 +28,11 @@ ALLOWED_HOSTS = os.environ.get(
     'localhost,127.0.0.1'
 ).split(',')
 
+FORCE_SCRIPT_NAME = "/register"
+
+USE_X_FORWARDED_HOST = True
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
