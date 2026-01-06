@@ -7,7 +7,10 @@ from django.views.generic import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', RedirectView.as_view(url='/admin/login/', permanent=False)),
+     path(
+        "",
+        RedirectView.as_view(pattern_name="admin:login", permanent=False)
+    ),
     path("api/", include("warranty_api.urls")),
     
 ]
