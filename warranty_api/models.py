@@ -4,7 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Asset(models.Model):
-    asset_id = models.CharField(max_length=100, unique=True)
+    asset_id = models.CharField(max_length=100, unique=True,)
     asset_name = models.CharField(max_length=255)
     serial_number = models.CharField(max_length=100)
     purchase_date = models.DateField()
