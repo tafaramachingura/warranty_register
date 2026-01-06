@@ -12,13 +12,14 @@ services:
       "
     volumes:
       - ./:/app
+
     restart: unless-stopped
     networks:
       - app_network
 
 volumes:
   static_volume:
-
+   - static_volume:/app/staticfiles
 networks:
   app_network:
     driver: bridge
